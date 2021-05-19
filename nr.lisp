@@ -1,15 +1,9 @@
 #| -*-: mode: common-lisp -*-
 exec sbcl --script $0 $* # |#
-
-(defun xnreverse2 (y x) (if y (xnreverse2 (cdr y) (rplacd y x)) x))
-(defun xnreverse  (y)         (xnreverse2      y   nil))
-
-(defun xreverse2  (y x) (if y (xreverse2  (cdr y) (cons (car y) x)) x))
-(defun xreverse   (y)         (xreverse2       y   nil))
-
-(defun nrev (y &optional x) (if y (nrev (cdr y) (rplacd    y  x)) x))
-(defun xrev (y &optional x) (if y (xrev (cdr y) (cons (car y) x)) x))
-
+(defun xnreverse2 (x y) (if (not x) y (xnreverse2 (cdr x) (rplacd    x  y))))
+(defun  xreverse2 (x y) (if (not x) y ( xreverse2 (cdr x) (cons (car x) y))))
+(defun xnreverse  (x)                 (xnreverse2      x   nil))
+(defun  xreverse  (x)                 ( xreverse2      x   nil))
 (print (xnreverse (list)))
 (print (xnreverse (list 1)))
 (print (xnreverse (list 1 2)))

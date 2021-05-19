@@ -1,2 +1,3 @@
-all:
-	./nr.lisp
+all: xyz
+	sbcl --script nr.lisp
+	./$<
